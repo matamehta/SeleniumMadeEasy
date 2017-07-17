@@ -128,7 +128,7 @@ public class WindowAndFrameActions {
 		}
 	}
 	
-	public void switchToFrameUsingFrameName(String frameName) throws Exception {
+	public void switchToFrameUsingFrameName(String frameName) {
 		try {
 			driver.switchTo().frame(frameName);
 		}
@@ -136,51 +136,25 @@ public class WindowAndFrameActions {
 			throw new NoSuchFrameException("Frame with name: " + frameName + " is not present");
 		}
 		catch(Exception e) {
-			throw new Exception(e.getCause().toString());
+			
 		}
 	}
 	
-	public void switchToFrameUsingBy(By byLocator) throws Exception {
-		try {
-			WebElement element = findElement.findWebElement(byLocator);
-			driver.switchTo().frame(element);
-		}
-		catch(NoSuchFrameException e) {
-			throw new NoSuchFrameException("Frame with locator " + byLocator + " is not present");
-		}
-		catch(Exception e) {
-			throw new Exception(e.getCause().toString());
-		}
+	public void switchToFrameUsingBy(By byLocator) {
+		WebElement element = driver.findElement(byLocator);
+		driver.switchTo().frame(element);
 	}
 	
-	public void switchToFrameUsingWebElement(WebElement elementLocator) throws Exception {
-		try {
-			driver.switchTo().frame(elementLocator);
-		}
-		catch(NoSuchFrameException e) {
-			throw new NoSuchFrameException(e.getCause().toString());
-		}
-		catch(Exception e) {
-			throw new Exception(e.getCause().toString());
-		}
+	public void switchToFrameUsingWebElement(WebElement elementLocator) {
+		driver.switchTo().frame(elementLocator);
 	}
 	
-	public void switchFromFrame() throws Exception {
-		try {
-			driver.switchTo().defaultContent();
-		}
-		catch(Exception e) {
-			throw new Exception(e.getCause().toString());
-		}
+	public void switchFromFrame() {
+		driver.switchTo().defaultContent();
 	}
 	
-	public void switchFromFrameToParent() throws Exception {
-		try {
-			driver.switchTo().parentFrame();
-		}
-		catch(Exception e) {
-			throw new Exception(e.getCause().toString());
-		}
+	public void switchFromFrameToParent() {
+		driver.switchTo().parentFrame();
 	}
 	
 	public void maximizeBrowserWindow() {

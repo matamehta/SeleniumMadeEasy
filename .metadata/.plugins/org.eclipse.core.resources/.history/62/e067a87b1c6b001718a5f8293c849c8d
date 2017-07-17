@@ -174,13 +174,8 @@ public class WindowAndFrameActions {
 		}
 	}
 	
-	public void switchFromFrameToParent() throws Exception {
-		try {
-			driver.switchTo().parentFrame();
-		}
-		catch(Exception e) {
-			throw new Exception(e.getCause().toString());
-		}
+	public void switchFromFrameToParent() {
+		driver.switchTo().parentFrame();
 	}
 	
 	public void maximizeBrowserWindow() {

@@ -4,7 +4,6 @@ import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.NoSuchFrameException;
 import org.openqa.selenium.NoSuchWindowException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,13 +11,10 @@ import org.openqa.selenium.WebElement;
 public class WindowAndFrameActions {
 	
 	WebDriver driver;
-	FindWebElement findElement;
 	
 	public WindowAndFrameActions(WebDriver driver) {
 		this.driver = driver;
-		findElement = new FindWebElement(this.driver);
 	}
-	
 	
 	public void switchToWindowUsingExactTitle(String title) throws Exception {
 		try {
@@ -46,7 +42,6 @@ public class WindowAndFrameActions {
 		
 	}
 	
-
 	public void switchToWindowContainingTextUsingTitle(String title) throws Exception {
 		try {
 			Set<String> windows = driver.getWindowHandles();
@@ -71,7 +66,6 @@ public class WindowAndFrameActions {
 			throw new Exception(e.getCause().toString());
 		}
 	}
-	
 	
 	public void switchToWindowUsingIndex(int index) throws Exception {
 		try {
@@ -100,7 +94,6 @@ public class WindowAndFrameActions {
 		}
 	}
 	
-	
 	public Set<String> getAllWindowsTitles() throws Exception {
 		Set<String> windows;
 		try {
@@ -115,72 +108,29 @@ public class WindowAndFrameActions {
 		return windows;
 	}
 	
-	
-	public void switchToFrameUsingIndex(int index) throws Exception {
-		try {
-			driver.switchTo().frame(index-1);
-		}
-		catch(NoSuchFrameException e) {
-			throw new NoSuchFrameException("Frame with index: " + index + " is not present");
-		}
-		catch(Exception e) {
-			throw new Exception(e.getCause().toString());
-		}
+	public void switchToFrameUsingIndex(int index) {
+		driver.switchTo().frame(index-1);
 	}
 	
-	public void switchToFrameUsingFrameName(String frameName) throws Exception {
-		try {
-			driver.switchTo().frame(frameName);
-		}
-		catch(NoSuchFrameException e) {
-			throw new NoSuchFrameException("Frame with name: " + frameName + " is not present");
-		}
-		catch(Exception e) {
-			throw new Exception(e.getCause().toString());
-		}
+	public void switchToFrameUsingFrameName(String frameName) {
+		driver.switchTo().frame(frameName);
 	}
 	
-	public void switchToFrameUsingBy(By byLocator) throws Exception {
-		try {
-			WebElement element = findElement.findWebElement(byLocator);
-			driver.switchTo().frame(element);
-		}
-		catch(NoSuchFrameException e) {
-			throw new NoSuchFrameException("Frame with locator " + byLocator + " is not present");
-		}
-		catch(Exception e) {
-			throw new Exception(e.getCause().toString());
-		}
+	public void switchToFrameUsingBy(By byLocator) {
+		WebElement element = driver.findElement(byLocator);
+		driver.switchTo().frame(element);
 	}
 	
-	public void switchToFrameUsingWebElement(WebElement elementLocator) throws Exception {
-		try {
-			driver.switchTo().frame(elementLocator);
-		}
-		catch(NoSuchFrameException e) {
-			throw new NoSuchFrameException(e.getCause().toString());
-		}
-		catch(Exception e) {
-			throw new Exception(e.getCause().toString());
-		}
+	public void switchToFrameUsingWebElement(WebElement elementLocator) {
+		driver.switchTo().frame(elementLocator);
 	}
 	
-	public void switchFromFrame() throws Exception {
-		try {
-			driver.switchTo().defaultContent();
-		}
-		catch(Exception e) {
-			throw new Exception(e.getCause().toString());
-		}
+	public void switchFromFrame() {
+		driver.switchTo().defaultContent();
 	}
 	
-	public void switchFromFrameToParent() throws Exception {
-		try {
-			driver.switchTo().parentFrame();
-		}
-		catch(Exception e) {
-			throw new Exception(e.getCause().toString());
-		}
+	public void switchFromFrameToParent() {
+		driver.switchTo().parentFrame();
 	}
 	
 	public void maximizeBrowserWindow() {

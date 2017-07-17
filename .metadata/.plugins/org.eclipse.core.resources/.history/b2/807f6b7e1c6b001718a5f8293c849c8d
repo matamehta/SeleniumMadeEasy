@@ -174,7 +174,7 @@ public class WindowAndFrameActions {
 		}
 	}
 	
-	public void switchFromFrameToParent() throws Exception {
+	public void switchFromFrameToParent() {
 		try {
 			driver.switchTo().parentFrame();
 		}

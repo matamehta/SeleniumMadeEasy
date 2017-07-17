@@ -157,30 +157,17 @@ public class WindowAndFrameActions {
 		try {
 			driver.switchTo().frame(elementLocator);
 		}
-		catch(NoSuchFrameException e) {
-			throw new NoSuchFrameException(e.getCause().toString());
-		}
 		catch(Exception e) {
 			throw new Exception(e.getCause().toString());
 		}
 	}
 	
-	public void switchFromFrame() throws Exception {
-		try {
-			driver.switchTo().defaultContent();
-		}
-		catch(Exception e) {
-			throw new Exception(e.getCause().toString());
-		}
+	public void switchFromFrame() {
+		driver.switchTo().defaultContent();
 	}
 	
-	public void switchFromFrameToParent() throws Exception {
-		try {
-			driver.switchTo().parentFrame();
-		}
-		catch(Exception e) {
-			throw new Exception(e.getCause().toString());
-		}
+	public void switchFromFrameToParent() {
+		driver.switchTo().parentFrame();
 	}
 	
 	public void maximizeBrowserWindow() {
