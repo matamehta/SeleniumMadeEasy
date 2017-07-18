@@ -1,4 +1,4 @@
-package WebActions;
+package com.seleniummadeeasy.webactions;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
@@ -69,5 +69,4 @@ public class FindWebElement {
 		
 		return element;
 	}
-
 }

@@ -1,5 +1,6 @@
-package WebActions;
+package com.seleniummadeeasy.webactions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -8,28 +9,27 @@ import org.openqa.selenium.InvalidSelectorException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.seleniummadeeasy.exceptions.NoSuchAttributeException;
 
 public class FormActions {
 	
 	WebDriver driver;
-	WebDriverWait wait;
 	Actions action;
 	FindWebElement findElement;
+	WaitActions waitAction;
 	
 	final int WAIT_TIMEOUT = 60;
 	
 	public FormActions(WebDriver driver) {
 		this.driver = driver;
-		this.wait = new WebDriverWait(this.driver, WAIT_TIMEOUT);
 		action = new Actions(this.driver);
 		findElement = new FindWebElement(this.driver);
+		waitAction = new WaitActions(this.driver);
 	}
 	
 	public void enterTextUsingBy(By byLocator, String text) throws Exception {
@@ -55,12 +55,7 @@ public class FormActions {
 	
 	public void clickUsingBy(By byLocator) throws Exception {
 		try {
-			wait.until(ExpectedConditions.elementToBeClickable(byLocator));
-		}
-		catch(TimeoutException e) {
-			throw new TimeoutException("WebElement using locator " + byLocator + " is not clickable on wweb page");
-		}
-		try {
+			waitAction.waitForElementToBeClickable(byLocator);
 			WebElement element = findElement.findWebElement(byLocator);
 			action.moveToElement(element).click().build().perform();
 			waitForPageToLoad();
@@ -72,12 +67,7 @@ public class FormActions {
 	
 	public void clickUsingWebElement(WebElement elementLocator) throws Exception {
 		try {
-			wait.until(ExpectedConditions.elementToBeClickable(elementLocator));
-		}
-		catch(TimeoutException e) {
-			throw new TimeoutException("WebElement using locator " + elementLocator + " is not clickable on wweb page");
-		}
-		try {
+			waitAction.waitForElementToBeClickable(elementLocator);
 			action.moveToElement(elementLocator).click().build().perform();
 			waitForPageToLoad();
 		}
@@ -88,12 +78,7 @@ public class FormActions {
 	
 	public void checkUsingBy(By byLocator) throws Exception {
 		try {
-			wait.until(ExpectedConditions.elementToBeClickable(byLocator));
-		}
-		catch(TimeoutException e) {
-			throw new TimeoutException("WebElement using locator " + byLocator + " is not clickable on wweb page");
-		}
-		try {
+			waitAction.waitForElementToBeClickable(byLocator);
 			WebElement element = findElement.findWebElement(byLocator);
 			if(element.isSelected()) {
 				action.moveToElement(element).click().build().perform();
@@ -107,12 +92,7 @@ public class FormActions {
 	
 	public void checkUsingWebElement(WebElement elementLocator) throws Exception {
 		try {
-			wait.until(ExpectedConditions.elementToBeClickable(elementLocator));
-		}
-		catch(TimeoutException e) {
-			throw new TimeoutException("WebElement using locator " + elementLocator + " is not clickable on wweb page");
-		}
-		try {
+			waitAction.waitForElementToBeClickable(elementLocator);
 			if(elementLocator.isSelected()) {
 				action.moveToElement(elementLocator).click().build().perform();
 				waitForPageToLoad();
@@ -125,12 +105,7 @@ public class FormActions {
 	
 	public void unCheckUsingBy(By byLocator) throws Exception {
 		try {
-			wait.until(ExpectedConditions.elementToBeClickable(byLocator));
-		}
-		catch(TimeoutException e) {
-			throw new TimeoutException("WebElement using locator " + byLocator + " is not clickable on wweb page");
-		}
-		try {
+			waitAction.waitForElementToBeClickable(byLocator);
 			WebElement element = findElement.findWebElement(byLocator);
 			if(!element.isSelected()) {
 				action.moveToElement(element).click().build().perform();
@@ -145,12 +120,7 @@ public class FormActions {
 	
 	public void unCheckUsingWebElement(WebElement elementLocator) throws Exception {
 		try {
-			wait.until(ExpectedConditions.elementToBeClickable(elementLocator));
-		}
-		catch(TimeoutException e) {
-			throw new TimeoutException("WebElement using locator " + elementLocator + " is not clickable on wweb page");
-		}
-		try {
+			waitAction.waitForElementToBeClickable(elementLocator);
 			if(!elementLocator.isSelected()) {
 				action.moveToElement(elementLocator).click().build().perform();
 				waitForPageToLoad();
@@ -318,11 +288,39 @@ public class FormActions {
 		return textToReturn;
 	}
 	
+	public ArrayList<String> getAllAttributes(WebElement elementLocator) throws Exception {
+		ArrayList<String> attributes;
+		try {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			attributes = (ArrayList<String>) js.executeScript(
+					"var items = {};"
+				  + "for (index = 0; index < arguments[0].attributes.length; ++index)"
+				  + "{ "
+				  + "items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value"
+				  + " };"
+				  + " return items;",
+				  elementLocator);
+		}
+		catch(Exception e) {
+			throw new Exception(e.getCause().toString());
+		}
+		return attributes;
+	}
+	
 	public String getAttributeUsingBy(By byLocator, String attributeName) throws Exception {
 		String attributeValue = null;
 		try {
 			WebElement element = findElement.findWebElement(byLocator);
-			attributeValue = element.getAttribute(attributeName);
+			ArrayList<String> attributes = getAllAttributes(element);
+			if(attributes.contains(attributeName)) {
+				attributeValue = element.getAttribute(attributeName);
+			}
+			else {
+				throw new NoSuchAttributeException();
+			}
+		}
+		catch(NoSuchAttributeException e) {
+			throw new NoSuchAttributeException("Attribute with name " + attributeName + " is not present in the HTML node");
 		}
 		catch(Exception e) {
 			throw new Exception(e.getCause().toString());
@@ -330,11 +328,23 @@ public class FormActions {
 		return attributeValue;
 	}
 	
-	public String getAttributeUsingWebElement(WebElement elementLocator, String attributeName) {
+	public String getAttributeUsingWebElement(WebElement elementLocator, String attributeName) throws Exception {
 		String attributeValue = null;
-		
-		attributeValue = elementLocator.getAttribute(attributeName);
-		
+		try {
+			ArrayList<String> attributes = getAllAttributes(elementLocator);
+			if(attributes.contains(attributeName)) {
+				attributeValue = elementLocator.getAttribute(attributeName);
+			}
+			else {
+				throw new NoSuchAttributeException();
+			}
+		}
+		catch(NoSuchAttributeException e) {
+			throw new NoSuchAttributeException("Attribute with name " + attributeName + " is not present in the HTML node");
+		}
+		catch(Exception e) {
+			throw new Exception(e.getCause().toString());
+		}
 		return attributeValue;
 	}
 	

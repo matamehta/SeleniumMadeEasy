@@ -1,4 +1,4 @@
-package WebActions;
+package com.seleniummadeeasy.webactions;
 
 import java.util.Set;
 
