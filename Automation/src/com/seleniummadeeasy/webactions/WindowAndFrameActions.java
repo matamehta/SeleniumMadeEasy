@@ -1,5 +1,8 @@
 package com.seleniummadeeasy.webactions;
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import org.openqa.selenium.By;
@@ -26,8 +29,8 @@ public class WindowAndFrameActions {
 			Boolean windowFound = false;
 			if(windows.size() > 0) {
 				for(String window : windows) {
-					if(window.equals(title)) {
-						driver.switchTo().window(window);
+					driver.switchTo().window(window);
+					if(driver.getTitle().equals(title)) {
 						windowFound = true;
 						break;
 					}
@@ -43,18 +46,19 @@ public class WindowAndFrameActions {
 		catch(Exception e) {
 			throw new Exception(e.getCause().toString());
 		}
-		
 	}
 	
 
 	public void switchToWindowContainingTextUsingTitle(String title) throws Exception {
+		String originalWindow = null;
 		try {
+			originalWindow = driver.getWindowHandle();
 			Set<String> windows = driver.getWindowHandles();
 			Boolean windowFound = false;
 			if(windows.size() > 0) {
 				for(String window : windows) {
-					if(window.contains(title)) {
-						driver.switchTo().window(window);
+					driver.switchTo().window(window);
+					if(driver.getTitle().contains(title)) {
 						windowFound = true;
 						break;
 					}
@@ -70,21 +74,27 @@ public class WindowAndFrameActions {
 		catch(Exception e) {
 			throw new Exception(e.getCause().toString());
 		}
+		finally {
+			driver.switchTo().window(originalWindow);
+		}
 	}
 	
 	
 	public void switchToWindowUsingIndex(int index) throws Exception {
+		String originalWindow = null;
 		try {
+			originalWindow = driver.getWindowHandle();
 			Set<String> windows = driver.getWindowHandles();
-			String window;
 			if(windows.size() > 0) {
 				if(windows.size() >= index && index > 0) {
-					for(int i = 0; i < windows.size(); i++) {
-						window = driver.getTitle();
-						if(i == (index-1)) {
-							driver.switchTo().window(window);
+					Iterator<String> it = windows.iterator();
+					int i = 0;
+					while(it.hasNext()) {
+						if(i == (index-1)) {		
+							driver.switchTo().window(it.next());
 							break;
-						}		
+						}
+						i++;
 					}
 				}
 				else {
@@ -98,21 +108,38 @@ public class WindowAndFrameActions {
 		catch(Exception e) {
 			throw new Exception(e.getCause().toString());
 		}
+		finally {
+			driver.switchTo().window(originalWindow);
+		}
 	}
 	
 	
-	public Set<String> getAllWindowsTitles() throws Exception {
+	public List<String> getAllWindowsTitles() throws Exception {
 		Set<String> windows;
+		List<String> windowTitle = null;
+		
+		String originalWindow = null;
+		
 		try {
+			originalWindow = driver.getWindowHandle();
 			windows = driver.getWindowHandles();
 			if(windows.size() <= 0) {
 				throw new Exception("No browser window is present");
+			}
+			
+			Iterator<String> it = windows.iterator();
+			while(it.hasNext()) {
+				driver.switchTo().window(it.next());
+				windowTitle.add(driver.getTitle());
 			}
 		}
 		catch(Exception e) {
 			throw new Exception(e.getCause().toString());
 		}
-		return windows;
+		finally {
+			driver.switchTo().window(originalWindow);
+		}
+		return windowTitle;
 	}
 	
 	
