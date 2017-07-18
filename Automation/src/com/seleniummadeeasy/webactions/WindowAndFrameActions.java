@@ -24,7 +24,9 @@ public class WindowAndFrameActions {
 	
 	
 	public void switchToWindowUsingExactTitle(String title) throws Exception {
+		String originalWindow = null;
 		try {
+			originalWindow = driver.getWindowHandle();
 			Set<String> windows = driver.getWindowHandles();
 			Boolean windowFound = false;
 			if(windows.size() > 0) {
@@ -45,6 +47,9 @@ public class WindowAndFrameActions {
 		}
 		catch(Exception e) {
 			throw new Exception(e.getCause().toString());
+		}
+		finally {
+			driver.switchTo().window(originalWindow);
 		}
 	}
 	
