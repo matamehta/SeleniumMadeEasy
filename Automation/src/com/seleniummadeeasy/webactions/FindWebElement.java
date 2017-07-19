@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.InvalidSelectorException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -26,6 +27,7 @@ public class FindWebElement {
 		WebElement element;
 		try {
 			element = driver.findElement(byLocator);
+			scrollToWebElement(element);
 		}
 		catch(InvalidSelectorException e) {
 			throw new InvalidSelectorException("Locator provided in locator " + byLocator + " is invalid");
@@ -49,7 +51,9 @@ public class FindWebElement {
 	public Select findDropdownElement(By byLocator) throws Exception {
 		Select element;
 		try {
-			element = new Select(driver.findElement(byLocator));
+			WebElement elementLocator = driver.findElement(byLocator);
+			element = new Select(elementLocator);
+			scrollToWebElement(elementLocator);
 		}
 		catch(InvalidSelectorException e) {
 			throw new InvalidSelectorException("Locator provided in locator " + byLocator + " is invalid");
@@ -68,5 +72,9 @@ public class FindWebElement {
 		}
 		
 		return element;
+	}
+	
+	public void scrollToWebElement(WebElement elementLocator) {
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", elementLocator);
 	}
 }
