@@ -80,7 +80,7 @@ public class FormActions {
 		try {
 			waitAction.waitForElementToBeClickable(byLocator);
 			WebElement element = findElement.findWebElement(byLocator);
-			if(element.isSelected()) {
+			if(!element.isSelected()) {
 				action.moveToElement(element).click().build().perform();
 				waitForPageToLoad();
 			}
@@ -93,7 +93,7 @@ public class FormActions {
 	public void checkUsingWebElement(WebElement elementLocator) throws Exception {
 		try {
 			waitAction.waitForElementToBeClickable(elementLocator);
-			if(elementLocator.isSelected()) {
+			if(!elementLocator.isSelected()) {
 				action.moveToElement(elementLocator).click().build().perform();
 				waitForPageToLoad();
 			}
@@ -107,7 +107,7 @@ public class FormActions {
 		try {
 			waitAction.waitForElementToBeClickable(byLocator);
 			WebElement element = findElement.findWebElement(byLocator);
-			if(!element.isSelected()) {
+			if(element.isSelected()) {
 				action.moveToElement(element).click().build().perform();
 				waitForPageToLoad();
 			}
@@ -119,6 +119,33 @@ public class FormActions {
 	}
 	
 	public void unCheckUsingWebElement(WebElement elementLocator) throws Exception {
+		try {
+			waitAction.waitForElementToBeClickable(elementLocator);
+			if(elementLocator.isSelected()) {
+				action.moveToElement(elementLocator).click().build().perform();
+				waitForPageToLoad();
+			}
+		}
+		catch(Exception e) {
+			throw new Exception(e.getCause().toString());
+		}
+	}
+	
+	public void selectRadioUsingBy(By byLocator) throws Exception {
+		try {
+			waitAction.waitForElementToBeClickable(byLocator);
+			WebElement element = findElement.findWebElement(byLocator);
+			if(!element.isSelected()) {
+				action.moveToElement(element).click().build().perform();
+				waitForPageToLoad();
+			}
+		}
+		catch(Exception e) {
+			throw new Exception(e.getCause().toString());
+		}
+	}
+	
+	public void selectRadioUsingWebElement(WebElement elementLocator) throws Exception {
 		try {
 			waitAction.waitForElementToBeClickable(elementLocator);
 			if(!elementLocator.isSelected()) {
@@ -421,13 +448,10 @@ public class FormActions {
 	public Boolean isElementPresentUsingBy(By byLocator) throws Exception {
 		Boolean isElementPresent = false;
 		try {
-			List<WebElement> elements = driver.findElements(byLocator);
+			List<WebElement> elements = findElement.findWebElements(byLocator);
 			if(elements.size() > 0) {
 				isElementPresent = true;
 			}
-		}
-		catch(InvalidSelectorException e) {
-			throw new InvalidSelectorException("Locator provided in locator " + byLocator + " is invalid");
 		}
 		catch(Exception e) {
 		 throw new Exception(e.getCause().toString());
