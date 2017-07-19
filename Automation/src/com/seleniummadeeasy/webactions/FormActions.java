@@ -232,6 +232,16 @@ public class FormActions {
 		}
 	}
 	
+	public void hoverUsingWebElement(WebElement elementLocator) throws Exception {
+		try {
+			action.moveToElement(elementLocator).build().perform();
+			waitForPageToLoad();
+		}
+		catch(Exception e) {
+			throw new Exception(e.getCause().toString());
+		}
+	}
+	
 	public void clickOkOnAlert() throws Exception {
 		try {
 			driver.switchTo().alert().accept();
@@ -250,16 +260,6 @@ public class FormActions {
 		}
 		catch(NoAlertPresentException e) {
 			throw new NoAlertPresentException("Alert is not present");
-		}
-		catch(Exception e) {
-			throw new Exception(e.getCause().toString());
-		}
-	}
-	
-	public void hoverUsingWebElement(WebElement elementLocator) throws Exception {
-		try {
-			action.moveToElement(elementLocator).build().perform();
-			waitForPageToLoad();
 		}
 		catch(Exception e) {
 			throw new Exception(e.getCause().toString());
