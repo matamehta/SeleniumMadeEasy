@@ -279,7 +279,7 @@ public class FormActions {
 		return textToReturn;
 	}
 	
-	public String getTextUsingBy(WebElement elementLocator) throws Exception {
+	public String getTextUsingWebElement(WebElement elementLocator) throws Exception {
 		String textToReturn = null;
 		try {
 			textToReturn = elementLocator.getText();
