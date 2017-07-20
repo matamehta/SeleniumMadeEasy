@@ -1,9 +1,11 @@
 package com.seleniummadeeasy.exceptions;
 
-public class NoSuchAttributeException extends Exception{
+import org.openqa.selenium.NotFoundException;
+
+public class NoSuchAttributeException extends NotFoundException{
 	
 	public NoSuchAttributeException() {
-		
+		this("Desired attribute is not present");
 	}
 	
 	public NoSuchAttributeException(String message) {
