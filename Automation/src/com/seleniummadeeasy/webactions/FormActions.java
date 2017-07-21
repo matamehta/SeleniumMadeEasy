@@ -460,6 +460,10 @@ public class FormActions {
 		return isElementPresent;
 	}
 	
+	public void dragAndDropUsingWebElement(WebElement sourceLocator, WebElement destinationLocator) {
+		action.dragAndDrop(sourceLocator, destinationLocator).build().perform();
+	}
+	
 	public void waitForPageToLoad() {
 		
 		String pageLocadStatus = null;
