@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import com.seleniummadeeasy.exceptions.NoHeaderFoundException;
+import com.seleniummadeeasy.findelement.FindWebElement;
 
 public class TableActions {
 	
@@ -172,7 +173,7 @@ public class TableActions {
 		Select column;
 		try {
 			column = new Select (getColumnLocatorBasedOnRowNumber(byRowLocator, byColumnLocator, rowNumber, isFirstRowHeader));
-			formAction.selectDropdownByTextUsinWebElement(column, option);
+			formAction.selectDropdownByTextUsingWebElement(column, option);
 		}
 		catch(Exception e) {
 			throw new Exception(e.getCause().toString());
@@ -183,7 +184,7 @@ public class TableActions {
 		Select column;
 		try {
 			column = new Select (getColumnLocatorBasedOnRowNumber(rowsLocator, byColumnLocator, rowNumber, isFirstRowHeader));
-			formAction.selectDropdownByTextUsinWebElement(column, option);
+			formAction.selectDropdownByTextUsingWebElement(column, option);
 		}
 		catch(Exception e) {
 			throw new Exception(e.getCause().toString());
@@ -194,7 +195,7 @@ public class TableActions {
 		Select column;
 		try {
 			column = new Select (getColumnLocatorBasedOnRowNumber(byRowLocator, byColumnLocator, rowNumber, isFirstRowHeader));
-			formAction.selectDropdownByIndexUsinWebElement(column, index);
+			formAction.selectDropdownByIndexUsingWebElement(column, index);
 		}
 		catch(Exception e) {
 			throw new Exception(e.getCause().toString());
@@ -205,7 +206,7 @@ public class TableActions {
 		Select column;
 		try {
 			column = new Select (getColumnLocatorBasedOnRowNumber(rowsLocator, byColumnLocator, rowNumber, isFirstRowHeader));
-			formAction.selectDropdownByIndexUsinWebElement(column, index);
+			formAction.selectDropdownByIndexUsingWebElement(column, index);
 		}
 		catch(Exception e) {
 			throw new Exception(e.getCause().toString());
@@ -216,7 +217,7 @@ public class TableActions {
 		Select column;
 		try {
 			column = new Select (getColumnLocatorBasedOnRowNumber(byRowLocator, byColumnLocator, rowNumber, isFirstRowHeader));
-			formAction.selectDropdownByValueUsinWebElement(column, value);
+			formAction.selectDropdownByValueUsingWebElement(column, value);
 		}
 		catch(Exception e) {
 			throw new Exception(e.getCause().toString());
@@ -227,7 +228,7 @@ public class TableActions {
 		Select column;
 		try {
 			column = new Select (getColumnLocatorBasedOnRowNumber(rowsLocator, byColumnLocator, rowNumber, isFirstRowHeader));
-			formAction.selectDropdownByValueUsinWebElement(column, value);
+			formAction.selectDropdownByValueUsingWebElement(column, value);
 		}
 		catch(Exception e) {
 			throw new Exception(e.getCause().toString());
