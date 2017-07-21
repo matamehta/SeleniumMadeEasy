@@ -399,9 +399,11 @@ public class FormActions {
 		catch(Exception e) {
 			if(e instanceof NoSuchElementException) {
 				isElementVisible = false;
+				return isElementVisible;
 			}
 			else if(e instanceof ElementNotVisibleException) {
 				isElementVisible = false;
+				return isElementVisible;
 			}
 			else {
 				throw new Exception(e.getCause().toString());
@@ -416,7 +418,17 @@ public class FormActions {
 			isElementVisible = elementLocator.isDisplayed();
 		}
 		catch(Exception e) {
-			throw new Exception(e.getCause().toString());
+			if(e instanceof NoSuchElementException) {
+				isElementVisible = false;
+				return isElementVisible;
+			}
+			else if(e instanceof ElementNotVisibleException) {
+				isElementVisible = false;
+				return isElementVisible;
+			}
+			else {
+				throw new Exception(e.getCause().toString());
+			}
 		}
 		
 		return isElementVisible;
