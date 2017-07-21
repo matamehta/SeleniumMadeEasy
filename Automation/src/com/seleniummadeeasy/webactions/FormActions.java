@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
-import org.openqa.selenium.InvalidSelectorException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
@@ -15,6 +14,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 import com.seleniummadeeasy.exceptions.NoSuchAttributeException;
+import com.seleniummadeeasy.findelement.FindWebElement;
 
 public class FormActions {
 	
@@ -169,7 +169,7 @@ public class FormActions {
 		}
 	}
 	
-	public void selectDropdownByTextUsinWebElement(Select dropdownElement, String option) throws Exception {
+	public void selectDropdownByTextUsingWebElement(Select dropdownElement, String option) throws Exception {
 		try {
 			dropdownElement.selectByVisibleText(option);
 			waitForPageToLoad();
@@ -190,7 +190,7 @@ public class FormActions {
 		}
 	}
 	
-	public void selectDropdownByIndexUsinWebElement(Select dropdownElement, int index) throws Exception {
+	public void selectDropdownByIndexUsingWebElement(Select dropdownElement, int index) throws Exception {
 		try {
 			dropdownElement.selectByIndex(index-1);
 			waitForPageToLoad();
@@ -211,7 +211,7 @@ public class FormActions {
 		}
 	}
 	
-	public void selectDropdownByValueUsinWebElement(Select dropdownElement, String value) throws Exception {
+	public void selectDropdownByValueUsingWebElement(Select dropdownElement, String value) throws Exception {
 		try {
 			dropdownElement.selectByValue(value);
 			waitForPageToLoad();
@@ -315,30 +315,11 @@ public class FormActions {
 		return textToReturn;
 	}
 	
-	public ArrayList<String> getAllAttributes(WebElement elementLocator) throws Exception {
-		ArrayList<String> attributes;
-		try {
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			attributes = (ArrayList<String>) js.executeScript(
-					"var items = {};"
-				  + "for (index = 0; index < arguments[0].attributes.length; ++index)"
-				  + "{ "
-				  + "items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value"
-				  + " };"
-				  + " return items;",
-				  elementLocator);
-		}
-		catch(Exception e) {
-			throw new Exception(e.getCause().toString());
-		}
-		return attributes;
-	}
-	
 	public String getAttributeUsingBy(By byLocator, String attributeName) throws Exception {
 		String attributeValue = null;
 		try {
 			WebElement element = findElement.findWebElement(byLocator);
-			ArrayList<String> attributes = getAllAttributes(element);
+			ArrayList<String> attributes = findElement.getAllAttributes(element);
 			if(attributes.contains(attributeName)) {
 				attributeValue = element.getAttribute(attributeName);
 			}
@@ -358,7 +339,7 @@ public class FormActions {
 	public String getAttributeUsingWebElement(WebElement elementLocator, String attributeName) throws Exception {
 		String attributeValue = null;
 		try {
-			ArrayList<String> attributes = getAllAttributes(elementLocator);
+			ArrayList<String> attributes = findElement.getAllAttributes(elementLocator);
 			if(attributes.contains(attributeName)) {
 				attributeValue = elementLocator.getAttribute(attributeName);
 			}
