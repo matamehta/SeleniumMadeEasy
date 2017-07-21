@@ -1,5 +1,6 @@
-package com.seleniummadeeasy.webactions;
+package com.seleniummadeeasy.findelement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -16,13 +17,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class FindWebElement {
 	
 	WebDriver driver;
-	WebDriverWait wait;
-	
-	final int WAIT_TIMEOUT = 60;
 	
 	public FindWebElement(WebDriver driver) {
 		this.driver = driver;
-		wait = new WebDriverWait(this.driver, WAIT_TIMEOUT);
 	}
 	
 	public WebElement findWebElement(By byLocator) throws Exception {
@@ -113,6 +110,25 @@ public class FindWebElement {
 		}
 		
 		return element;
+	}
+	
+	public ArrayList<String> getAllAttributes(WebElement elementLocator) throws Exception {
+		ArrayList<String> attributes;
+		try {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			attributes = (ArrayList<String>) js.executeScript(
+					"var items = {};"
+				  + "for (index = 0; index < arguments[0].attributes.length; ++index)"
+				  + "{ "
+				  + "items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value"
+				  + " };"
+				  + " return items;",
+				  elementLocator);
+		}
+		catch(Exception e) {
+			throw new Exception(e.getCause().toString());
+		}
+		return attributes;
 	}
 	
 	public void scrollToWebElement(WebElement elementLocator) {
