@@ -12,6 +12,8 @@ import org.openqa.selenium.NoSuchWindowException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.seleniummadeeasy.findelement.FindWebElement;
+
 public class WindowAndFrameActions {
 	
 	WebDriver driver;
