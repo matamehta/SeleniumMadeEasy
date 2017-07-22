@@ -3,6 +3,7 @@ package com.seleniummadeeasy.findelement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.JavascriptExecutor;
@@ -62,6 +63,46 @@ public class FindAngularElement {
 		return element;
 	}
 	
+	public By getByLocatorFromAngularLocator(AngularLocator angualarLocator, String locatorValue) throws Exception {
+		By byLocator = null;
+		String locator = null;
+		try {
+			switch(angualarLocator) {
+				case ngModel:
+					locator = "ng-model";
+					byLocator = getAngularElementByLocator(locator, locatorValue);
+					break;
+				case ngBind:
+					locator = "ng-bind";
+					byLocator = getAngularElementByLocator(locator, locatorValue);
+					break;
+				case ngOptions:
+					locator = "ng-options";
+					byLocator = getAngularElementByLocator(locator, locatorValue);
+					break;
+				case ngSwitch:
+					locator = "ng-switch";
+					byLocator = getAngularElementByLocator(locator, locatorValue);
+					break;
+				default: 
+					break;
+			}
+		}
+		catch(NoSuchElementException e) {
+			throw new Exception(e.getCause().toString());
+		}
+		catch(ElementNotVisibleException e) {
+			throw new Exception(e.getCause().toString());
+		}
+		catch(ElementNotInteractableException e) {
+			throw new Exception(e.getCause().toString());
+		}
+		catch(Exception e) {
+			throw new Exception(e.getCause().toString());
+		}
+		return byLocator;
+	}
+	
 	public List<WebElement> getWebElementsFromAngularLocator(AngularLocator angularLocator, String locatorValue) throws Exception {
 		List<WebElement> elements = null;
 		String locator = null;
@@ -87,7 +128,7 @@ public class FindAngularElement {
 		List<WebElement> elements;
 		ArrayList<String> attributes = new ArrayList<String>();
 		try {
-			String queryToFindAllNodesInHTML = "return document.querySelector(*)";
+			String queryToFindAllNodesInHTML = "return document.querySelectorAll(*)";
 			elements = (List<WebElement>) ((JavascriptExecutor)driver).executeScript(queryToFindAllNodesInHTML);
 			for(WebElement ele : elements) {
 				attributes = findWebElement.getAllAttributes(ele);
@@ -131,12 +172,63 @@ public class FindAngularElement {
 		return element;
 	}
 	
+	private By getAngularElementByLocator(String angularLocator, String locatorValue) throws Exception {
+		WebElement element = null;
+		By byLocator = null;
+		List<WebElement> elements;
+		ArrayList<String> attributes = new ArrayList<String>();
+		try {
+			String queryToFindAllNodesInHTML = "return document.querySelectorAll(*)";
+			elements = (List<WebElement>) ((JavascriptExecutor)driver).executeScript(queryToFindAllNodesInHTML);
+			for(WebElement ele : elements) {
+				attributes = findWebElement.getAllAttributes(ele);
+				for(String attr : attributes) {
+					if(attr.contains(angularLocator)) {
+						if(ele.getAttribute(attr) == locatorValue) {
+							element = ele;
+							byLocator = By.cssSelector(ele.getTagName() + "[" + attr + "*=" + locatorValue + "]");
+							break;	
+						}
+					}
+				}
+				if(element != null) {
+					break;
+				}
+			}
+			if(element == null) {
+				throw new NoSuchElementException("No Angular element with locator " + angularLocator + "=" +
+										locatorValue + "is found");
+			}
+			if(!element.isDisplayed()) {
+				throw new ElementNotVisibleException("Angular element with locator " + angularLocator + "=" +
+						locatorValue + "is not visible");
+			}
+			if(!element.isEnabled()){
+				throw new ElementNotVisibleException("Angular element with locator " + angularLocator + "=" +
+						locatorValue + "is not enable");
+			}
+		}
+		catch(NoSuchElementException e) {
+			throw new Exception(e.getCause().toString());
+		}
+		catch(ElementNotVisibleException e) {
+			throw new Exception(e.getCause().toString());
+		}
+		catch(ElementNotInteractableException e) {
+			throw new Exception(e.getCause().toString());
+		}
+		catch(Exception e) {
+			throw new Exception(e.getCause().toString());
+		}
+		return byLocator;
+	}
+	
 	private List<WebElement> getAngularWebElements(String angularLocator, String locatorValue) throws Exception {
 		List<WebElement> elements;
 		List<WebElement> elementsToReturn = null;
 		ArrayList<String> attributes = new ArrayList<String>();
 		try {
-			String queryToFindAllNodesInHTML = "return document.querySelector(*)";
+			String queryToFindAllNodesInHTML = "return document.querySelectorAll(*)";
 			elements = (List<WebElement>) ((JavascriptExecutor)driver).executeScript(queryToFindAllNodesInHTML);
 			for(WebElement ele : elements) {
 				attributes = findWebElement.getAllAttributes(ele);
