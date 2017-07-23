@@ -23,6 +23,16 @@ public class FindAngularElement {
 		findWebElement = new FindWebElement(this.driver);
 	}
 	
+	/**
+	 * Get selenium WebElement from Angular specific locators
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param angualarLocator Angular locator
+	 * @param locatorValue	Value of angular attribute 
+	 * @return				Selenium WebElement
+	 * @throws Exception
+	 */
 	public WebElement getWebElementFromAngularLocator(AngularLocator angualarLocator, String locatorValue) throws Exception {
 		WebElement element = null;
 		String locator = null;
@@ -63,6 +73,16 @@ public class FindAngularElement {
 		return element;
 	}
 	
+	/**
+	 * Get Selenium By locator from Angular specific locator
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param angualarLocator Angular locator
+	 * @param locatorValue	Value of angular attribute 
+	 * @return				Selenium By locator
+	 * @throws Exception
+	 */
 	public By getByLocatorFromAngularLocator(AngularLocator angualarLocator, String locatorValue) throws Exception {
 		By byLocator = null;
 		String locator = null;
@@ -103,6 +123,16 @@ public class FindAngularElement {
 		return byLocator;
 	}
 	
+	/**
+	 * Get list of Selenium WebElements using Angular specific locator
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param angualarLocator Angular locator
+	 * @param locatorValue	Value of angular attribute 
+	 * @return				List of Selenium WebElements
+	 * @throws Exception
+	 */
 	public List<WebElement> getWebElementsFromAngularLocator(AngularLocator angularLocator, String locatorValue) throws Exception {
 		List<WebElement> elements = null;
 		String locator = null;
@@ -123,6 +153,16 @@ public class FindAngularElement {
 		return elements;
 	}
 	
+	/**
+	 * Get Selenium WebElement from Angular attribute
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param angualarLocator HTML Attribute of angular element
+	 * @param locatorValue	Value of angular attribute 
+	 * @return				Selenium WebElement
+	 * @throws Exception
+	 */
 	private WebElement getAngularWebElement(String angularLocator, String locatorValue) throws Exception {
 		WebElement element = null;
 		List<WebElement> elements;
@@ -172,6 +212,16 @@ public class FindAngularElement {
 		return element;
 	}
 	
+	/**
+	 * Get Selenium By locator from Angular attribute
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param angualarLocator HTML Attribute of angular element
+	 * @param locatorValue	Value of angular attribute 
+	 * @return				Selenium By locator
+	 * @throws Exception
+	 */
 	private By getAngularElementByLocator(String angularLocator, String locatorValue) throws Exception {
 		WebElement element = null;
 		By byLocator = null;
@@ -223,6 +273,16 @@ public class FindAngularElement {
 		return byLocator;
 	}
 	
+	/**
+	 * Get List of Selenium WebElements from Angular attribute
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param angualarLocator HTML Attribute of angular element
+	 * @param locatorValue	Value of angular attribute 
+	 * @return				List of Selenium WebElements
+	 * @throws Exception
+	 */
 	private List<WebElement> getAngularWebElements(String angularLocator, String locatorValue) throws Exception {
 		List<WebElement> elements;
 		List<WebElement> elementsToReturn = null;

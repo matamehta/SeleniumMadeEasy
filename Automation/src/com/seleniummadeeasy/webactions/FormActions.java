@@ -32,6 +32,15 @@ public class FormActions {
 		waitAction = new WaitActions(this.driver);
 	}
 	
+	/**
+	 * Enter text in a textbox using Selenium By locator
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param byLocator Selenium By locator
+	 * @param text String to enter in textbox
+	 * @throws Exception
+	 */
 	public void enterTextUsingBy(By byLocator, String text) throws Exception {
 		try {
 			WebElement element = findElement.findWebElement(byLocator);
@@ -43,6 +52,15 @@ public class FormActions {
 		}
 	}
 	
+	/**
+	 * Enter text in a textbox using Selenium WebElement
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param elementLocator Selenium WebElement
+	 * @param text String to enter in textbox
+	 * @throws Exception
+	 */
 	public void enterTextUsingWebElement(WebElement elementLocator, String text) throws Exception {
 		try {
 			action.sendKeys(elementLocator, text).build().perform();
@@ -53,6 +71,14 @@ public class FormActions {
 		}
 	}
 	
+	/**
+	 * Click on element using Selenium By locator
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param byLocator Selenium By locator
+	 * @throws Exception
+	 */
 	public void clickUsingBy(By byLocator) throws Exception {
 		try {
 			waitAction.waitForElementToBeClickable(byLocator);
@@ -65,6 +91,14 @@ public class FormActions {
 		}
 	}
 	
+	/**
+	 * Click on element using Selenium WebElement
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param elementLocator Selenium WebElement
+	 * @throws Exception
+	 */
 	public void clickUsingWebElement(WebElement elementLocator) throws Exception {
 		try {
 			waitAction.waitForElementToBeClickable(elementLocator);
@@ -76,6 +110,14 @@ public class FormActions {
 		}
 	}
 	
+	/**
+	 * Check an element using Selenium By locator
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param byLocator Selenium By locator
+	 * @throws Exception
+	 */
 	public void checkUsingBy(By byLocator) throws Exception {
 		try {
 			waitAction.waitForElementToBeClickable(byLocator);
@@ -90,6 +132,14 @@ public class FormActions {
 		}
 	}
 	
+	/**
+	 * Check an element using Selenium WebElement
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param elementLocator Selenium WebElement
+	 * @throws Exception
+	 */
 	public void checkUsingWebElement(WebElement elementLocator) throws Exception {
 		try {
 			waitAction.waitForElementToBeClickable(elementLocator);
@@ -103,6 +153,14 @@ public class FormActions {
 		}
 	}
 	
+	/**
+	 * UnCheck an element using Selenium By locator
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param byLocator Selenium By locator
+	 * @throws Exception
+	 */
 	public void unCheckUsingBy(By byLocator) throws Exception {
 		try {
 			waitAction.waitForElementToBeClickable(byLocator);
@@ -118,6 +176,14 @@ public class FormActions {
 		
 	}
 	
+	/**
+	 * UnCheck an element using Selenium WebElement
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param elementLocator Selenium WebElement
+	 * @throws Exception
+	 */
 	public void unCheckUsingWebElement(WebElement elementLocator) throws Exception {
 		try {
 			waitAction.waitForElementToBeClickable(elementLocator);
@@ -131,6 +197,14 @@ public class FormActions {
 		}
 	}
 	
+	/**
+	 * Select a radio-button using Selenium By locator
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param byLocator Selenium By locator
+	 * @throws Exception
+	 */
 	public void selectRadioUsingBy(By byLocator) throws Exception {
 		try {
 			waitAction.waitForElementToBeClickable(byLocator);
@@ -145,6 +219,14 @@ public class FormActions {
 		}
 	}
 	
+	/**
+	 * Select a radio-button using Selenium WebElement
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param elementLocator Selenium WebElement
+	 * @throws Exception
+	 */
 	public void selectRadioUsingWebElement(WebElement elementLocator) throws Exception {
 		try {
 			waitAction.waitForElementToBeClickable(elementLocator);
@@ -158,6 +240,14 @@ public class FormActions {
 		}
 	}
 	
+	/**
+	 * Select dropdown via option text using Selenium By locator
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param byLocator Selenium By locator
+	 * @throws Exception
+	 */
 	public void selectDropdownByTextUsingBy(By byLocator, String option) throws Exception {
 		try {
 			Select dropdown = findElement.findDropdownElement(byLocator);
@@ -169,6 +259,14 @@ public class FormActions {
 		}
 	}
 	
+	/**
+	 * Select dropdown via option text using Selenium WebElement
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param elementLocator Selenium WebElement
+	 * @throws Exception
+	 */
 	public void selectDropdownByTextUsingWebElement(Select dropdownElement, String option) throws Exception {
 		try {
 			dropdownElement.selectByVisibleText(option);
@@ -179,6 +277,14 @@ public class FormActions {
 		}
 	}
 	
+	/**
+	 * Select dropdown via index using Selenium By locator
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param byLocator Selenium By locator
+	 * @throws Exception
+	 */
 	public void selectDropdownByIndexUsingBy(By byLocator, int index) throws Exception {
 		try {
 			Select dropdown = findElement.findDropdownElement(byLocator);
@@ -190,6 +296,14 @@ public class FormActions {
 		}
 	}
 	
+	/**
+	 * Select dropdown via index using Selenium WebElement
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param elementLocator Selenium WebElement
+	 * @throws Exception
+	 */
 	public void selectDropdownByIndexUsingWebElement(Select dropdownElement, int index) throws Exception {
 		try {
 			dropdownElement.selectByIndex(index-1);
@@ -200,6 +314,14 @@ public class FormActions {
 		}
 	}
 	
+	/**
+	 * Select dropdown via Value using Selenium By locator
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param byLocator Selenium By locator
+	 * @throws Exception
+	 */
 	public void selectDropdownByValueUsingBy(By byLocator, String value) throws Exception {
 		try {
 			Select dropdown = findElement.findDropdownElement(byLocator);
@@ -211,6 +333,14 @@ public class FormActions {
 		}
 	}
 	
+	/**
+	 * Select dropdown via Value using Selenium WebElement
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param elementLocator Selenium WebElement
+	 * @throws Exception
+	 */
 	public void selectDropdownByValueUsingWebElement(Select dropdownElement, String value) throws Exception {
 		try {
 			dropdownElement.selectByValue(value);
@@ -221,6 +351,14 @@ public class FormActions {
 		}
 	}
 	
+	/**
+	 * Hover on an element using Selenium By locator
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param byLocator Selenium By locator
+	 * @throws Exception
+	 */
 	public void hoverUsingBy(By byLocator) throws Exception {
 		try {
 			WebElement element = findElement.findWebElement(byLocator);
@@ -232,6 +370,14 @@ public class FormActions {
 		}
 	}
 	
+	/**
+	 * Hover on an element using Selenium WebElement
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param elementLocator Selenium WebElement
+	 * @throws Exception
+	 */
 	public void hoverUsingWebElement(WebElement elementLocator) throws Exception {
 		try {
 			action.moveToElement(elementLocator).build().perform();
@@ -242,6 +388,13 @@ public class FormActions {
 		}
 	}
 	
+	/**
+	 * Click OK on Alert
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @throws Exception
+	 */
 	public void clickOkOnAlert() throws Exception {
 		try {
 			driver.switchTo().alert().accept();
@@ -254,6 +407,13 @@ public class FormActions {
 		}
 	}
 	
+	/**
+	 * Click Cancel on Alert
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @throws Exception
+	 */
 	public void clickCancelOnAlert() throws Exception {
 		try{
 			driver.switchTo().alert().dismiss();
@@ -266,11 +426,26 @@ public class FormActions {
 		}
 	}
 	
+	/**
+	 * Get text of web element using Selenium By locator
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param byLocator Selenium By locator
+	 * @return			Text of web element
+	 * @throws Exception
+	 */
 	public String getTextUsingBy(By byLocator) throws Exception {
 		String textToReturn = null;
 		try {
 			WebElement element = findElement.findWebElement(byLocator);
-			textToReturn = element.getText();
+			if(element.getTagName().equals("select")) {
+				WebElement selectedOption = ((Select)element).getFirstSelectedOption();
+				textToReturn = selectedOption.getText();
+			}
+			else {
+				textToReturn = element.getText();
+			}
 		}
 		catch(Exception e) {
 			throw new Exception(e.getCause().toString());
@@ -279,6 +454,15 @@ public class FormActions {
 		return textToReturn;
 	}
 	
+	/**
+	 * Get text of web element using Selenium WebElement
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param byLocator Selenium WebElement
+	 * @return			Text of web element
+	 * @throws Exception
+	 */
 	public String getTextUsingWebElement(WebElement elementLocator) throws Exception {
 		String textToReturn = null;
 		try {
@@ -291,6 +475,15 @@ public class FormActions {
 		return textToReturn;
 	}
 	
+	/**
+	 * Get text from textbox using Selenium By locator
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param byLocator Selenium By locator
+	 * @return			Text present in textbox
+	 * @throws Exception
+	 */
 	public String getTextFromTextboxUsingBy(By byLocator) throws Exception {
 		String textToReturn = null;
 		try {
@@ -303,7 +496,16 @@ public class FormActions {
 		
 		return textToReturn;
 	}
-	
+
+	/**
+	 * Get text of textbox using Selenium WebElement
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param byLocator Selenium WebElement
+	 * @return			Text present in textbox
+	 * @throws Exception
+	 */
 	public String getTextFromTextboxUsingWebElement(WebElement elementLocator) throws Exception {
 		String textToReturn = null;
 		try {
@@ -315,6 +517,16 @@ public class FormActions {
 		return textToReturn;
 	}
 	
+	/**
+	 * Get attribute value using Selenium By locator
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param byLocator Selenium By locator
+	 * @param attributeName Attribute of whose value is required
+	 * @return				Value of attribute
+	 * @throws Exception
+	 */
 	public String getAttributeUsingBy(By byLocator, String attributeName) throws Exception {
 		String attributeValue = null;
 		try {
@@ -336,6 +548,16 @@ public class FormActions {
 		return attributeValue;
 	}
 	
+	/**
+	 * Get attribute value using Selenium WebElement
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param byLocator Selenium WebElement
+	 * @param attributeName Attribute of whose value is required
+	 * @return				Value of attribute
+	 * @throws Exception
+	 */
 	public String getAttributeUsingWebElement(WebElement elementLocator, String attributeName) throws Exception {
 		String attributeValue = null;
 		try {
@@ -356,6 +578,14 @@ public class FormActions {
 		return attributeValue;
 	}
 	
+	/**
+	 * Get text from Alert box
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @return Text present in Alert
+	 * @throws Exception
+	 */
 	public String getTextFromAlert() throws Exception {
 		String alertText = null;
 		try {
@@ -371,8 +601,17 @@ public class FormActions {
 		return alertText;
 	}
 	
-	public Boolean isElementVisibleUsingBy(By byLocator) throws Exception {
-		Boolean isElementVisible = false;
+	/**
+	 * Is web element with Selenium By locator visible
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param byLocator Selenium By locator
+	 * @return			true if element is visible, false otherwise
+	 * @throws Exception
+	 */
+	public boolean isElementVisibleUsingBy(By byLocator) throws Exception {
+		boolean isElementVisible = false;
 		try {
 			WebElement element = findElement.findWebElement(byLocator);
 			isElementVisible = element.isDisplayed();
@@ -393,8 +632,17 @@ public class FormActions {
 		return isElementVisible;
 	}
 	
-	public Boolean isElementVisibleUsingWebElement(WebElement elementLocator) throws Exception {
-		Boolean isElementVisible = false;
+	/**
+	 * Is web element with Selenium WebElement visible
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param elementLocator Selenium WebElement
+	 * @return				 true if element is visible, false otherwise
+	 * @throws Exception
+	 */
+	public boolean isElementVisibleUsingWebElement(WebElement elementLocator) throws Exception {
+		boolean isElementVisible = false;
 		try {
 			isElementVisible = elementLocator.isDisplayed();
 		}
@@ -415,8 +663,17 @@ public class FormActions {
 		return isElementVisible;
 	}
 	
-	public Boolean isElementEnableUsingBy(By byLocator) throws Exception {
-		Boolean isElementEnable = false;
+	/**
+	 * Is web element with Selenium By locator enable
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param byLocator Selenium By locator
+	 * @return			true if element is enable, false otherwise
+	 * @throws Exception
+	 */
+	public boolean isElementEnableUsingBy(By byLocator) throws Exception {
+		boolean isElementEnable = false;
 		try {
 			WebElement element = findElement.findWebElement(byLocator);
 			isElementEnable = element.isEnabled();
@@ -427,8 +684,17 @@ public class FormActions {
 		return isElementEnable;
 	}
 	
-	public Boolean isElementEnableUsingWebElement(WebElement elementLocator) throws Exception {
-		Boolean isElementEnable = false;
+	/**
+	 * Is web element with Selenium WebElement enable
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param elementLocator Selenium WebElement
+	 * @return				 true if element is enable, false otherwise
+	 * @throws Exception
+	 */
+	public boolean isElementEnableUsingWebElement(WebElement elementLocator) throws Exception {
+		boolean isElementEnable = false;
 		try {
 			isElementEnable = elementLocator.isEnabled();
 		}
@@ -438,8 +704,17 @@ public class FormActions {
 		return isElementEnable;
 	}
 	
-	public Boolean isElementPresentUsingBy(By byLocator) throws Exception {
-		Boolean isElementPresent = false;
+	/**
+	 * Is web element with Selenium By locator present in HTML
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param elementLocator Selenium By locator
+	 * @return				 true if element is present in HTML, false otherwise
+	 * @throws Exception
+	 */
+	public boolean isElementPresentUsingBy(By byLocator) throws Exception {
+		boolean isElementPresent = false;
 		try {
 			List<WebElement> elements = findElement.findWebElements(byLocator);
 			if(elements.size() > 0) {
@@ -453,10 +728,66 @@ public class FormActions {
 		return isElementPresent;
 	}
 	
+	/**
+	 * Is web element selected with Selenium By locator
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param elementLocator Selenium By locator
+	 * @return				 true if web element is Selected. false otherwise
+	 * @throws Exception
+	 */
+	public boolean isElementSelectedUsingBy(By byLocator) throws Exception {
+		boolean isElementSelected = false;
+		try {
+			WebElement element = findElement.findWebElement(byLocator);
+			isElementSelected = element.isSelected();
+		}
+		catch(Exception e) {
+		 throw new Exception(e.getCause().toString());
+		}
+		
+		return isElementSelected;
+	}
+	
+	/**
+	 * Is web element selected with Selenium WebElement
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param elementLocator Selenium WebElement
+	 * @return				 true if web element is Selected. false otherwise
+	 * @throws Exception
+	 */
+	public boolean isElementSelectedUsingWebElement(WebElement elementLocator) throws Exception {
+		boolean isElementSelected = false;
+		try {
+			isElementSelected = elementLocator.isSelected();
+		}
+		catch(Exception e) {
+		 throw new Exception(e.getCause().toString());
+		}
+		
+		return isElementSelected;
+	}
+	
+	/**
+	 * Drag and drop an element using Selenium WebElement
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param sourceLocator Selenium WebElement
+	 * @param destinationLocator Selenium WebElement
+	 */
 	public void dragAndDropUsingWebElement(WebElement sourceLocator, WebElement destinationLocator) {
 		action.dragAndDrop(sourceLocator, destinationLocator).build().perform();
 	}
 	
+	/**
+	 * Wait for page to load ocmpletely
+	 * 
+	 * @author Mohit Gupta
+	 */
 	public void waitForPageToLoad() {
 		
 		String pageLocadStatus = null;
