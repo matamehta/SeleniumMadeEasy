@@ -24,7 +24,14 @@ public class WindowAndFrameActions {
 		findElement = new FindWebElement(this.driver);
 	}
 	
-	
+	/**
+	 * Switch to browser window using exact title
+	 * 
+	 *  @author Mohit Gupta
+	 *  
+	 * @param title Exact title of Browser window
+	 * @throws Exception
+	 */
 	public void switchToWindowUsingExactTitle(String title) throws Exception {
 		String originalWindow = null;
 		try {
@@ -55,7 +62,14 @@ public class WindowAndFrameActions {
 		}
 	}
 	
-
+	/**
+	 * Switch to browser window having specific title
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param title Title present in browser window
+	 * @throws Exception
+	 */
 	public void switchToWindowContainingTextUsingTitle(String title) throws Exception {
 		String originalWindow = null;
 		try {
@@ -86,7 +100,14 @@ public class WindowAndFrameActions {
 		}
 	}
 	
-	
+	/**
+	 * Switch to browser window using indexing
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param index Index of browser window to switch to
+	 * @throws Exception
+	 */
 	public void switchToWindowUsingIndex(int index) throws Exception {
 		String originalWindow = null;
 		try {
@@ -120,7 +141,14 @@ public class WindowAndFrameActions {
 		}
 	}
 	
-	
+	/**
+	 * Get title of all browswer window present
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @return Title of all browser windows
+	 * @throws Exception
+	 */
 	public List<String> getAllWindowsTitles() throws Exception {
 		Set<String> windows;
 		List<String> windowTitle = null;
@@ -149,7 +177,14 @@ public class WindowAndFrameActions {
 		return windowTitle;
 	}
 	
-	
+	/**
+	 * Switch to a frame using indexing
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param Index Index of frame
+	 * @throws Exception
+	 */
 	public void switchToFrameUsingIndex(int index) throws Exception {
 		try {
 			driver.switchTo().frame(index-1);
@@ -162,6 +197,14 @@ public class WindowAndFrameActions {
 		}
 	}
 	
+	/**
+	 * Switch to frame using its name
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param frameName Value of name attribute of frame
+	 * @throws Exception
+	 */
 	public void switchToFrameUsingFrameName(String frameName) throws Exception {
 		try {
 			driver.switchTo().frame(frameName);
@@ -174,6 +217,14 @@ public class WindowAndFrameActions {
 		}
 	}
 	
+	/**
+	 * Switch to frame using Selenium By locator
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param byLocator Selenium By locator
+	 * @throws Exception
+	 */
 	public void switchToFrameUsingBy(By byLocator) throws Exception {
 		try {
 			WebElement element = findElement.findWebElement(byLocator);
@@ -187,6 +238,14 @@ public class WindowAndFrameActions {
 		}
 	}
 	
+	/**
+	 * Switch to frame using Selenium WebElement
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @param elementLocator Selenium WebElement
+	 * @throws Exception
+	 */
 	public void switchToFrameUsingWebElement(WebElement elementLocator) throws Exception {
 		try {
 			driver.switchTo().frame(elementLocator);
@@ -199,7 +258,14 @@ public class WindowAndFrameActions {
 		}
 	}
 	
-	public void switchFromFrame() throws Exception {
+	/**
+	 * Switch out from a frame to under HTML body tag
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @throws Exception
+	 */
+	public void switchOutFromFrame() throws Exception {
 		try {
 			driver.switchTo().defaultContent();
 		}
@@ -208,6 +274,13 @@ public class WindowAndFrameActions {
 		}
 	}
 	
+	/**
+	 * Switch out from frame to parent
+	 * 
+	 * @author Mohit Gupta
+	 * 
+	 * @throws Exception
+	 */
 	public void switchFromFrameToParent() throws Exception {
 		try {
 			driver.switchTo().parentFrame();
@@ -215,14 +288,5 @@ public class WindowAndFrameActions {
 		catch(Exception e) {
 			throw new Exception(e.getCause().toString());
 		}
-	}
-	
-	public void maximizeBrowserWindow() {
-		driver.manage().window().maximize();
-	}
-	
-	public void setBrowserSize(int x, int y) {
-		Dimension d = new Dimension(x,y);
-		driver.manage().window().setSize(d);
 	}
 }
