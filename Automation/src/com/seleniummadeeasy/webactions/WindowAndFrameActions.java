@@ -1,12 +1,11 @@
 package com.seleniummadeeasy.webactions;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchFrameException;
 import org.openqa.selenium.NoSuchWindowException;
 import org.openqa.selenium.WebDriver;
@@ -151,7 +150,7 @@ public class WindowAndFrameActions {
 	 */
 	public List<String> getAllWindowsTitles() throws Exception {
 		Set<String> windows;
-		List<String> windowTitle = null;
+		List<String> windowTitle = new ArrayList<String>();
 		
 		String originalWindow = null;
 		
